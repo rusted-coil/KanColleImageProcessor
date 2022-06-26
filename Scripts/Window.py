@@ -6,7 +6,7 @@ class Window:
         self.Master = master
 
         # Window設定
-        master.title('KanColle ImageProcessor')
+        master.title('HAM Colle')
         master.geometry('1280x720')
 
         # MainViewを作成

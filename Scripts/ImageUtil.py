@@ -8,7 +8,7 @@ def GetStatusView(screenshot):
     (w, h) = screenshot.size
     if w != 1200 or h != 720:
         return None
-    return screenshot.crop((491, 147, 491 + 690, 147 + 555))
+    return screenshot.crop((491, 150, 491 + 690, 147 + 555))
 
 # 690x550の画像のリストを受け取り、並べた画像を生成して返します。
 # TODO 失敗した場合はNoneを返します。

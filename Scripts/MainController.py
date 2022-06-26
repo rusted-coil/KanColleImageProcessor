@@ -3,6 +3,7 @@ import os
 import threading
 import time
 import subprocess
+import numpy as np
 import pyperclip
 from PIL import ImageGrab
 
@@ -13,6 +14,7 @@ class MainController:
         self.View = view
         self.Image = None
         self.Images = []
+        self.LastArray = None
 
         # Viewのボタンに処理を紐づけ
         view.SetButtonCommand('Load', self.LoadFromClipboard)
@@ -25,12 +27,18 @@ class MainController:
         self.CaptureThread.start()
 
     def LoadFromClipboard(self):
-        img = ImageUtil.GetStatusView(ImageGrab.grabclipboard())
+        try:
+            img = ImageGrab.grabclipboard()
+        except:
+            img = None            
+        img = ImageUtil.GetStatusView(img)
         if not img is None:
-            self.Images.append(img)
-            self.Image = ImageUtil.GetOrganizedStatus(self.Images)
-            self.View.SetPreviewImage(self.Image)
-            pyperclip.copy('')
+            ary = np.array(img)
+            if self.LastArray is None or not np.array_equal(self.LastArray, ary):
+                self.LastArray = ary
+                self.Images.append(img)
+                self.Image = ImageUtil.GetOrganizedStatus(self.Images)
+                self.View.SetPreviewImage(self.Image)
 
     def Clear(self):
         self.Images = []

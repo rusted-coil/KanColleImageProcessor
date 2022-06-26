@@ -5,7 +5,7 @@ import time
 import subprocess
 import numpy as np
 import pyperclip
-from PIL import ImageGrab
+from PIL import ImageGrab, Image
 
 import ImageUtil
 
@@ -30,7 +30,12 @@ class MainController:
         try:
             img = ImageGrab.grabclipboard()
         except:
-            img = None            
+            img = None
+        if type(img) == list:
+            if type(img[0]) == Image:
+                img = img[0]
+            else:
+                img = None
         img = ImageUtil.GetStatusView(img)
         if not img is None:
             ary = np.array(img)
@@ -46,8 +51,8 @@ class MainController:
 
     def Save(self):
         if not self.Image is None:
-            self.Image.save(datetime.datetime.now().strftime('../Output/%Y%m%d_%H%M%S.png'))
-            subprocess.Popen(['explorer', os.path.abspath('../Output')])
+            self.Image.save(datetime.datetime.now().strftime('./Output/%Y%m%d_%H%M%S.png'))
+            subprocess.Popen(['explorer', os.path.abspath('./Output')])
 
     def ThreadLoop(self):
         # 定期処理

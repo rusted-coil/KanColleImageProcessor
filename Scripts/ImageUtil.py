@@ -22,8 +22,10 @@ def GetOrganizedStatus(images):
         width = 1
     elif count <= 7:
         width = 2
+    elif count % 6 == 1:
+        width = (count // 6) * 2 + 1
     else:
-        width = int((count - 1) / 6) * 3
+        width = ((count - 1) // 6) * 2 + 2
     if count == 7:
         height = 4
     elif count >= 8:

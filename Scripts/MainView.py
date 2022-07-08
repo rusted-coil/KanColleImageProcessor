@@ -39,5 +39,5 @@ class MainView:
             self.PreviewImage = None
             self.Preview['image'] = None
         else:
-            self.PreviewImage = ImageTk.PhotoImage(image = image.resize((image.width // 2, image.height // 2)))
+            self.PreviewImage = ImageTk.PhotoImage(image = image.resize((image.width // 3, image.height // 3)))
             self.Preview['image'] = self.PreviewImage

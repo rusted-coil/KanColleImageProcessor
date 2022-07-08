@@ -7,7 +7,7 @@ class Window:
 
         # Window設定
         master.title('HAM Colle')
-        master.geometry('1280x720')
+        master.geometry('640x480')
 
         # MainViewを作成
         self.View = MainView(master)
@@ -18,5 +18,6 @@ class Window:
 if __name__ == '__main__':
     import tkinter as tk
     root = tk.Tk()
+    root.iconbitmap('./icon.ico')
     app = Window(root)
     root.mainloop()
